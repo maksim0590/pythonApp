@@ -305,3 +305,23 @@ h2{
 
 }
 
+.lessendiv{
+    height: 80vh;
+    overflow: auto;
+    background-color: #8fc4f1;
+}
+
+.lessendiv2{
+    width: 300px;
+    height: 100px;
+    background-color: white;
+    border-radius: 10px;
+    margin: 10px;
+}
+
+.flex2 {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}

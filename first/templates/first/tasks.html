@@ -1,0 +1,704 @@
+{% extends 'first/base.html'%}
+{% load static %}
+
+
+{% block form %}
+<h2 style="color: white">СПИСОК ДЕЛ</h2>
+<div class="table-wrapper">
+    <table class="fl-table">
+        <thead>
+        <tr>
+            <th>Список дел</th>
+            <th {% if dayWeek == 0  %} style="background-color: crimson" {% endif %}>Понедельник</th>
+            <th {% if dayWeek == 1  %} style="background-color: crimson" {% endif %}>Вторник</th>
+            <th {% if dayWeek == 2  %} style="background-color: crimson" {% endif %}>Среда</th>
+            <th {% if dayWeek == 3  %} style="background-color: crimson" {% endif %}>Четверг</th>
+            <th {% if dayWeek == 4  %} style="background-color: crimson" {% endif %}>Пятница</th>
+            <th {% if dayWeek == 5  %} style="background-color: crimson" {% endif %}>Суббота</th>
+            <th {% if dayWeek == 6  %} style="background-color: crimson" {% endif %}>Воскресенье</th>
+        </tr>
+        </thead>
+        <tbody>
+<!--чистка зубов-->
+        <tr>
+            <td class="color_table"><img src="{% static '/first/img/teeth.png' %}" style="width: 30px; margin-right: 20px"> Почистить зубы </td>
+
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.teethMon == False %}
+                    <a href="{% url 'status' day='teethMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.teethMon == False %}
+                    <a href="{% url 'status' day='teethMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.teethTue == False %}
+                    <a href="{% url 'status' day='teethTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.teethMon == False %}
+                    <a href="{% url 'status' day='teethTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.teethWed == False %}
+                    <a href="{% url 'status' day='teethWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.teethWed == False %}
+                    <a href="{% url 'status' day='teethWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.teethThu == False %}
+                    <a href="{% url 'status' day='teethThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.teethThu == False %}
+                    <a href="{% url 'status' day='teethThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.teethFri == False %}
+                    <a href="{% url 'status' day='teethFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.teethFri == False %}
+                    <a href="{% url 'status' day='teethFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.teethSat == False %}
+                    <a href="{% url 'status' day='teethSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.teethSat == False %}
+                    <a href="{% url 'status' day='teethSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.teethSun == False %}
+                    <a href="{% url 'status' day='teethSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.teethSun == False %}
+                    <a href="{% url 'status' day='teethSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+
+<!--Расчесать волосы-->
+        <tr>
+            <td class="color_table"><img src="{% static '/first/img/hair.png' %}" style="width: 30px; margin-right: 20px">Расчесать волосы</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.hairMon == False %}
+                    <a href="{% url 'status' day='hairMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.hairMon == False %}
+                    <a href="{% url 'status' day='hairMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.hairTue == False %}
+                    <a href="{% url 'status' day='hairTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.hairTue == False %}
+                    <a href="{% url 'status' day='hairTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.hairWed == False %}
+                    <a href="{% url 'status' day='hairWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.hairWed == False %}
+                    <a href="{% url 'status' day='hairWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.hairThu == False %}
+                    <a href="{% url 'status' day='hairThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.hairThu == False %}
+                    <a href="{% url 'status' day='hairThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.hairFri == False %}
+                    <a href="{% url 'status' day='hairFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.hairFri == False %}
+                    <a href="{% url 'status' day='hairFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.hairSat == False %}
+                    <a href="{% url 'status' day='hairSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.hairSat == False %}
+                    <a href="{% url 'status' day='hairSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.hairSun == False %}
+                    <a href="{% url 'status' day='hairSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.hairSun == False %}
+                    <a href="{% url 'status' day='hairSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+        </tr>
+
+<!--Заправить постель-->
+        <tr>
+            <td class="color_table"><img src="{% static '/first/img/bed.png' %}" style="width: 30px; margin-right: 20px">Заправить постель</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.makeBedMon == False %}
+                    <a href="{% url 'status' day='makeBedMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.makeBedMon == False %}
+                    <a href="{% url 'status' day='makeBedMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.makeBedTue == False %}
+                    <a href="{% url 'status' day='makeBedTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.makeBedTue == False %}
+                    <a href="{% url 'status' day='makeBedTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.makeBedWed == False %}
+                    <a href="{% url 'status' day='makeBedWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.makeBedWede == False %}
+                    <a href="{% url 'status' day='makeBedWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.makeBedThu == False %}
+                    <a href="{% url 'status' day='makeBedThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.makeBedThu == False %}
+                    <a href="{% url 'status' day='makeBedThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.makeBedFri == False %}
+                    <a href="{% url 'status' day='makeBedFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.makeBedFri == False %}
+                    <a href="{% url 'status' day='makeBedFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.makeBedSat == False %}
+                    <a href="{% url 'status' day='makeBedSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.makeBedSati == False %}
+                    <a href="{% url 'status' day='makeBedSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.makeBedSun == False %}
+                    <a href="{% url 'status' day='makeBedSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.makeBedSun == False %}
+                    <a href="{% url 'status' day='makeBedSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+
+<!--Помыть обувь-->
+        <tr>
+            <td class="color_table"><img src="{% static '/first/img/shoes.png' %}" style="width: 30px; margin-right: 20px">Помыть обувь</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.washShoesMon == False %}
+                    <a href="{% url 'status' day='washShoesMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.washShoesMon == False %}
+                    <a href="{% url 'status' day='washShoesMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.washShoesTue == False %}
+                    <a href="{% url 'status' day='washShoesTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.washShoesTue == False %}
+                    <a href="{% url 'status' day='washShoesTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.washShoesWed == False %}
+                    <a href="{% url 'status' day='washShoesWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.washShoesWed == False %}
+                    <a href="{% url 'status' day='washShoesWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.washShoesThu == False %}
+                    <a href="{% url 'status' day='washShoesThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.washShoesThu == False %}
+                    <a href="{% url 'status' day='washShoesThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.washShoesFri == False %}
+                    <a href="{% url 'status' day='washShoesFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.washShoesFri == False %}
+                    <a href="{% url 'status' day='washShoesFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.washShoesSat == False %}
+                    <a href="{% url 'status' day='washShoesSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.washShoesSat == False %}
+                    <a href="{% url 'status' day='washShoesSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.washShoesSun == False %}
+                    <a href="{% url 'status' day='washShoesSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.washShoesSun == False %}
+                    <a href="{% url 'status' day='washShoesSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+
+<!--Сделать уроки-->
+        <tr>
+            <td class="color_table"><img src="{% static '/first/img/lesson.png' %}" style="width: 30px; margin-right: 20px">Сделать уроки</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.lessonsMon == False %}
+                    <a href="{% url 'status' day='lessonsMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.lessonsMon == False %}
+                    <a href="{% url 'status' day='lessonsMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.lessonsTue == False %}
+                    <a href="{% url 'status' day='lessonsTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.lessonsTue == False %}
+                    <a href="{% url 'status' day='lessonsTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.lessonsWed == False %}
+                    <a href="{% url 'status' day='lessonsWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.lessonsWed == False %}
+                    <a href="{% url 'status' day='lessonsWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.lessonsThu == False %}
+                    <a href="{% url 'status' day='lessonsThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.lessonsThu == False %}
+                    <a href="{% url 'status' day='lessonsThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.lessonsFri == False %}
+                    <a href="{% url 'status' day='lessonsFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.lessonsFri == False %}
+                    <a href="{% url 'status' day='lessonsFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.lessonsSat == False %}
+                    <a href="{% url 'status' day='lessonsSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.lessonsSat == False %}
+                    <a href="{% url 'status' day='lessonsSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.lessonsSun == False %}
+                    <a href="{% url 'status' day='lessonsSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.lessonsSun == False %}
+                    <a href="{% url 'status' day='lessonsSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+
+<!--Собрать портфель-->
+        <tr>
+            <td class="color_table"> <img src="{% static '/first/img/backpack.png' %}" style="width: 30px; margin-right: 20px">Собрать портфель</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.briefcaseMon == False %}
+                    <a href="{% url 'status' day='briefcaseMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.briefcaseMon == False %}
+                    <a href="{% url 'status' day='briefcaseMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.briefcaseTue == False %}
+                    <a href="{% url 'status' day='briefcaseTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.briefcaseTue == False %}
+                    <a href="{% url 'status' day='briefcaseTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.briefcaseWed == False %}
+                    <a href="{% url 'status' day='briefcaseWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.briefcaseWed == False %}
+                    <a href="{% url 'status' day='briefcaseWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.briefcaseThu == False %}
+                    <a href="{% url 'status' day='briefcaseThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.briefcaseThu == False %}
+                    <a href="{% url 'status' day='briefcaseThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.briefcaseFri == False %}
+                    <a href="{% url 'status' day='briefcaseFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.briefcaseFri == False %}
+                    <a href="{% url 'status' day='briefcaseFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.briefcaseSat == False %}
+                    <a href="{% url 'status' day='briefcaseSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.briefcaseSat == False %}
+                    <a href="{% url 'status' day='briefcaseSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.briefcaseSun == False %}
+                    <a href="{% url 'status' day='briefcaseSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.briefcaseSun == False %}
+                    <a href="{% url 'status' day='briefcaseSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+
+<!--Покормить кошку-->
+        <tr>
+            <td class="color_table"> <img src="{% static '/first/img/cat.png' %}" style="width: 35px; margin-right: 20px"> Покормить кошку</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.feedTheCatMon == False %}
+                    <a href="{% url 'status' day='feedTheCatMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.feedTheCatMon == False %}
+                    <a href="{% url 'status' day='feedTheCatMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.feedTheCatTue == False %}
+                    <a href="{% url 'status' day='feedTheCatTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.feedTheCatTue == False %}
+                    <a href="{% url 'status' day='feedTheCatTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.feedTheCatWed == False %}
+                    <a href="{% url 'status' day='feedTheCatWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.feedTheCatWed == False %}
+                    <a href="{% url 'status' day='feedTheCatWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.feedTheCatThu == False %}
+                    <a href="{% url 'status' day='feedTheCatThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.feedTheCatThu == False %}
+                    <a href="{% url 'status' day='feedTheCatThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.feedTheCatFri == False %}
+                    <a href="{% url 'status' day='feedTheCatFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.feedTheCatFri == False %}
+                    <a href="{% url 'status' day='feedTheCatFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.feedTheCatSat == False %}
+                    <a href="{% url 'status' day='feedTheCatSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.feedTheCatSat == False %}
+                    <a href="{% url 'status' day='feedTheCatSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.feedTheCatSun == False %}
+                    <a href="{% url 'status' day='feedTheCatSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.feedTheCatSun == False %}
+                    <a href="{% url 'status' day='feedTheCatSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+<!--Поиграть с Варей-->
+        <tr>
+            <td class="color_table"> <img src="{% static '/first/img/child.png' %}" style="width: 35px; margin-right: 20px">Поиграть с Варей</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.tePlayMon == False %}
+                    <a href="{% url 'status' day='tePlayMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.tePlayMon == False %}
+                    <a href="{% url 'status' day='tePlayMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.tePlayTue == False %}
+                    <a href="{% url 'status' day='tePlayTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.tePlayTue == False %}
+                    <a href="{% url 'status' day='tePlayTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.tePlayWed == False %}
+                    <a href="{% url 'status' day='tePlayWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.tePlayWed == False %}
+                    <a href="{% url 'status' day='tePlayWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.tePlayThu == False %}
+                    <a href="{% url 'status' day='tePlayThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.tePlayThu == False %}
+                    <a href="{% url 'status' day='tePlayThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.tePlayFri == False %}
+                    <a href="{% url 'status' day='tePlayFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.tePlayFri == False %}
+                    <a href="{% url 'status' day='tePlayFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.tePlaySat == False %}
+                    <a href="{% url 'status' day='tePlaySat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.tePlaySat == False %}
+                    <a href="{% url 'status' day='tePlaySat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.tePlaySun == False %}
+                    <a href="{% url 'status' day='tePlaySun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.tePlaySun == False %}
+                    <a href="{% url 'status' day='tePlaySun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+        </tr>
+<!--Убрать со стола-->
+        <tr>
+            <td class="color_table"> <img src="{% static '/first/img/dishes.png' %}" style="width: 35px; margin-right: 20px">Убрать со стола</td>
+
+            <td {% if dayWeek == 0 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 0 and user.removeTableMon == False %}
+                    <a href="{% url 'status' day='removeTableMon' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 0 and user.removeTableMon == False %}
+                    <a href="{% url 'status' day='removeTableMon' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 1 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 1 and user.removeTableTue == False %}
+                    <a href="{% url 'status' day='removeTableTue' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 1 and user.removeTableTue == False %}
+                    <a href="{% url 'status' day='removeTableTue' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 2 and user.removeTableWed == False %}
+                    <a href="{% url 'status' day='removeTableWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 2 and user.removeTableWed == False %}
+                    <a href="{% url 'status' day='removeTableWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 3 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 3 and user.removeTableThu == False %}
+                    <a href="{% url 'status' day='removeTableThu' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 3 and user.removeTableThu == False %}
+                    <a href="{% url 'status' day='removeTableThu' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 4 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 4 and user.removeTableFri == False %}
+                    <a href="{% url 'status' day='removeTableFri' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 4 and user.removeTableFri == False %}
+                    <a href="{% url 'status' day='removeTableFri' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 5 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 5 and user.removeTableSat == False %}
+                    <a href="{% url 'status' day='removeTableSat' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 5 and user.removeTableSat == False %}
+                    <a href="{% url 'status' day='removeTableSat' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+
+            <td {% if dayWeek == 6 %} style="background-color: powderblue" {% endif %} >
+                {% if dayWeek != 6 and user.removeTableSun == False %}
+                    <a href="{% url 'status' day='removeTableSun' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
+                {% elif dayWeek == 6 and user.removeTableSun == False %}
+                    <a href="{% url 'status' day='removeTableSun' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
+                {% else %}
+                    <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
+                {% endif %}
+            </td>
+        </tr>
+        <tbody>
+    </table>
+
+</div>
+
+<a href="delete" style="color: darkred">Обнулить данные</a> <hr>
+
+{% endblock %}

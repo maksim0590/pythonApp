@@ -14,20 +14,22 @@
     <title>Деловые детки</title>
 </head>
 <body id="bg" style="background-image: url('{% static "/first/img/obl.png" %}')";>
-<div class="zvezda">
 
-    <div>
-<img src="{% static '/first/img/zvezda.png' %}" style="width: 50px" >
+
+<div class="flex">
+    <div class="flex">
+        <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px; height: 47px" >
+    <p class="cuonter">{{count}}  {{name}}</p>
     </div>
-    <div>
-    <p class="cuonter">{{count}}   {{user.name}}</p>
+    <div class="flex">
+    <a href="bonus" style="color: darkred"><button type="button" class="btn btn-warning on-clock2" style="color: white">Заработать больше звез</button></a>
+        <a href="{% url  'index' %}" style="margin-left: 10px"><button type="button" class="btn btn-danger">Выход</button></a>
     </div>
-    <div><a href="{% url  'index' %}">ВЫХОД</a></div>
 </div>
+
 
 {% block form %}
 {% endblock %}
-
 
 </body>
 </html>

@@ -198,7 +198,7 @@
             <td {% if dayWeek == 2 %} style="background-color: powderblue" {% endif %} >
                 {% if dayWeek != 2 and user.makeBedWed == False %}
                     <a href="{% url 'status' day='makeBedWed' %}" class="off-click" title="Сегодня не понедельник"><button type="submit" class="btn btn-danger" disabled > : (  </button></a>
-                {% elif dayWeek == 2 and user.makeBedWede == False %}
+                {% elif dayWeek == 2 and user.makeBedWed == False %}
                     <a href="{% url 'status' day='makeBedWed' %}" class="on-clock"><button type="submit" class="btn btn-danger"> : (  </button></a>
                 {% else %}
                     <img src="{% static '/first/img/zvezda.png' %}" style="width: 50px">
@@ -699,6 +699,9 @@
 
 </div>
 
-<a href="delete" style="color: darkred">Обнулить данные</a> <hr>
-
+</div>
+      <div style="margin-top: 20px">
+<a href="delete" style="margin-left: 10px; margin-top: 30px"><button type="button" class="btn btn-danger">Удалить все звёзды</button></a>
+        </div>
+</div>
 {% endblock %}

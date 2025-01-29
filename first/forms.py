@@ -8,8 +8,9 @@ class TestForms(ModelForm): # название класса произвольн
         fields = ['name', 'age', 'text']
         widgets = {
             'name': TextInput(attrs={
+                'label':"Имя",
                 'class':'form-control',
-                'placeholder': 'Ваше имя'
+                'placeholder': 'Ваше имя',
             }),
             'age': TextInput(attrs={
                 'class': 'form-control',

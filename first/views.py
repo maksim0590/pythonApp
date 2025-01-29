@@ -7,9 +7,6 @@ from .models import Progress
 from django.shortcuts import render, redirect
 import datetime
 import sys
-# from .servicesDb import proba
-# from .servicesDb import deleteAll
-
 from .servicesDb import DbData
 
 
@@ -34,15 +31,14 @@ def mainuser(request):
         return render(request, "first/tasks.html", context={'count': count, 'user':user, 'dayWeek':dayWeek})
 
     else:
-        info = Progress.objects.create(name=name, prize='none', count_zvezd=1, date=datetime.datetime.now())
-        request.session['id_name'] = info.id
+        DbData.createUser(request=request, name=name)
         return redirect('mainusershow')
 def mainuserShow(request):
     id = request.session.get('id_name')
     user = Progress.objects.get(id=id)
     count = user.count_zvezd
     name = user.name
-    return render(request, 'first/main.html', context={'name': name, 'count': count})
+    return render(request, 'first/main.html', context={'name': name, 'count': count, 'session':id})
 
 
 def gogames(request):
@@ -52,7 +48,7 @@ def gogames(request):
     save_prize.prize = prize
     save_prize.count_zvezd +=1
     count = save_prize.count_zvezd
-    save_prize.save(update_fields=["prize", 'count_zvezd'])
+    save_prize.save()
     return redirect('gogamesshow')
 def gogamesShow(request):
     id = request.session.get('id_name')
@@ -99,15 +95,16 @@ def status(request, day):
     sendMessage(f'Пользователь: **{user.name}** \n Выполнил задание: **{task}** \n На счету у пользователя:**{user.count_zvezd}** звезд')
     return redirect('task')
 def delete(request):
-    DbData.deleteAll()
-    del request.session['id_name']
+    DbData.deleteAll(request=request)
     return redirect('index')
 
+def bonus(request):
+    return render(request, 'first/bonus_task.html', {'count':'30', 'name':'Joe'})
 
 
 #_________________________________________________________________________
 
-def test(request):
+def testForm(request):
     error = ''
     if request.method == 'POST':
         form = TestForms(request.POST)

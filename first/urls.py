@@ -13,7 +13,8 @@ urlpatterns = [
     path('tasks', views.tasks, name='task'),
     path('status/<str:day>/', views.status, name='status'),
     path('delete', views.delete, name='delete'),
-    path('test', views.test, name='test'),
+    path('test', views.testForm, name='test'),
     path('test2', views.test2, name='test2'),
+    path('bonus', views.bonus, name='bonus'),
 
 ]

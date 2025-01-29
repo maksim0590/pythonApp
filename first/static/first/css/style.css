@@ -285,5 +285,23 @@ h2{
   to { margin-left: 75%;}
     from { opacity:100%;}
     to { opacity:0%;}
+}
+
+
+.flex {
+    margin: 10px;
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+.on-clock2 {
+    animation-duration: 1.2s;
+  animation-name: link;
+  animation-iteration-count: infinite;
+}
+@keyframes link {
+    from { opacity:0%;}
+    to { opacity:100%;}
 
 }
+

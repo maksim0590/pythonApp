@@ -5,97 +5,37 @@
 
 
 <div class="table-wrapper lessendiv ">
+<h1 style="font-size: 100px">{{title}}</h1>
 
-<div class="flex2">
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
+{% if message %}
+    <div class="corrected_message">
+        {{message}}
     </div>
-
-    <div class="flex2">
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
+    {% elif message_error %}
+    <div class="incorrected_message">
+        {{message_error}}
     </div>
+        {% else %}
+        <div>
 
-    <div class="flex2">
-        <div class="lessendiv2">
-        njn
         </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-    </div>
+        {% endif %}
+    <div class="flex_primer">
 
-    <div class="flex2">
-        <div class="lessendiv2">
-        njn
+        <div>
+           <p class="style_primer">{{a}} + {{b}} =</p>
         </div>
-        <div class="lessendiv2">
-        njn
+        <div>
+            <form action="{% url 'bonusPrimer' %}" method="post">
+                {% csrf_token %}
+                <input type="text" name="rezult" class="form-control" autofocus>
+            </form>
         </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
+
     </div>
 
 
-    <div class="flex2">
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-        <div class="lessendiv2">
-        njn
-        </div>
-    </div>
+
 
 </div>
 

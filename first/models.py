@@ -91,3 +91,11 @@ class Test(models.Model):
 
     def __str__(self):
         return self.name
+
+class Calcul(models.Model):
+    number1 = models.IntegerField('Первое значение')
+    number2 = models.IntegerField('Второе значение')
+    number3 = models.IntegerField('Третье значение')
+    rezult = models.IntegerField('Результат')
+    rezultUser = models.IntegerField('Результат пользователя')
+

@@ -1,6 +1,9 @@
 from dbm import error
 from lib2to3.fixes.fix_input import context
 from turtle import TurtleGraphicsError
+
+from pyexpat.errors import messages
+from django.http import HttpResponse
 from .forms import TestForms
 from .services import sendMessage
 from .models import Progress
@@ -8,7 +11,8 @@ from django.shortcuts import render, redirect
 import datetime
 import sys
 from .servicesDb import DbData
-
+import random
+from .models import Calcul
 
 def index(request):
     return render(request, 'first/index.html')
@@ -32,6 +36,9 @@ def mainuser(request):
 
     else:
         DbData.createUser(request=request, name=name)
+        object = Calcul.objects.create(number1=0, number2=0, number3=0, rezult=0, rezultUser=0)
+        object.save()
+        # request.session['id'] = object.id
         return redirect('mainusershow')
 def mainuserShow(request):
     id = request.session.get('id_name')
@@ -98,8 +105,53 @@ def delete(request):
     DbData.deleteAll(request=request)
     return redirect('index')
 
+
+
+
+
+
+
+
 def bonus(request):
-    return render(request, 'first/bonus_task.html', {'count':'30', 'name':'Joe'})
+    title = 'Реши пример'
+
+    a = random.randint(1, 10)
+    b = random.randint(1, 10)
+    c = a + b
+    object = Calcul.objects.create(number1=a, number2=b, number3=0, rezult=c, rezultUser=0)
+    request.session['id'] = object.id
+
+    return HttpResponse(object)
+
+    # return render(request, 'first/bonus_task.html',
+    #                   {'count': 0, 'name':0, 'title': title, 'a': object.number1, 'b': object.number2,
+    #                    'id': object.id})
+
+
+
+
+def bonusPrimer(request):
+    rezult_input = request.POST.get('rezult')
+    request.session['rezult'] = rezult_input
+    # id = request.session.get('id')
+    # object = Calcul.objects.get(id=id)
+    # object.rezultUser = int(rezult_input)
+    # object.save()
+
+    # return  HttpResponse(object.rezult)
+    return redirect('bonus')
+
+
+
+
+
+
+
+
+
+
+
+
 
 
 #_________________________________________________________________________

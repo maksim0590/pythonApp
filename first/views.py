@@ -23,15 +23,15 @@ def welcome(request):
 def mainuser(request):
     nameFromInput = request.POST.get('name')
     nameDbObject = Progress.objects.get(name=nameFromInput)
+    request.session['id_name'] = nameDbObject.id
     if nameDbObject:
         return redirect('task')
+    else:
+        objectUser = Progress.objects.create(name=nameDbObject, prize='none', count_zvezd=1, date=datetime.datetime.now())
+        request.session['id_name'] = objectUser.id
+        object = Calcul.objects.create(number1=0, number2=0, number3=0, rezult=0, rezultUser=0)
 
-        # return render(request, "first/tasks.html", context={'count': nameDbObject.count_zvezd, 'user':nameDbObject.name, 'dayWeek':dayWeek})
-#     else:
-#         objectUser = Progress.objects.create(name=nameDbObject, prize='none', count_zvezd=1, date=datetime.datetime.now())
-#         request.session['id_name'] = objectUser.id
-#         object = Calcul.objects.create(number1=0, number2=0, number3=0, rezult=0, rezultUser=0)
-#         return redirect('mainusershow')
+        return redirect('mainusershow')
 def mainuserShow(request):
     id = request.session.get('id_name')
     user = Progress.objects.get(id=id)

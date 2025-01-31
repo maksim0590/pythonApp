@@ -21,25 +21,17 @@ def welcome(request):
     return render(request, 'first/welcome_pg.html')
 
 def mainuser(request):
-    name = request.POST.get('name')
-    mes = Progress.objects.filter(name__contains=name)
-    if mes:
-        for i in mes:
-            id = i
-        name = Progress.objects.get(name=i)
-        id_user = name.id
-        user = Progress.objects.get(id=id_user)
-        count = user.count_zvezd
-        data = datetime.datetime.now()
-        dayWeek = data.weekday()
-        return render(request, "first/tasks.html", context={'count': count, 'user':user, 'dayWeek':dayWeek})
+    nameFromInput = request.POST.get('name')
+    nameDbObject = Progress.objects.get(name=nameFromInput)
+    if nameDbObject:
+        return redirect('task')
 
-    else:
-        DbData.createUser(request=request, name=name)
-        object = Calcul.objects.create(number1=0, number2=0, number3=0, rezult=0, rezultUser=0)
-        object.save()
-        # request.session['id'] = object.id
-        return redirect('mainusershow')
+        # return render(request, "first/tasks.html", context={'count': nameDbObject.count_zvezd, 'user':nameDbObject.name, 'dayWeek':dayWeek})
+#     else:
+#         objectUser = Progress.objects.create(name=nameDbObject, prize='none', count_zvezd=1, date=datetime.datetime.now())
+#         request.session['id_name'] = objectUser.id
+#         object = Calcul.objects.create(number1=0, number2=0, number3=0, rezult=0, rezultUser=0)
+#         return redirect('mainusershow')
 def mainuserShow(request):
     id = request.session.get('id_name')
     user = Progress.objects.get(id=id)
@@ -69,7 +61,6 @@ def gogamesShow(request):
 
 def tasks(request):
     id = request.session.get('id_name')
-
     user = Progress.objects.get(id=id)
     count = user.count_zvezd
     data = datetime.datetime.now()
@@ -107,46 +98,85 @@ def delete(request):
 
 
 
-
-
-
-
-
 def bonus(request):
+    global object
     title = 'Реши пример'
-    a = random.randint(1, 10)
-    b = random.randint(1, 10)
-    c = a + b
-    object = Calcul.objects.create(number1=a, number2=b, number3=0, rezult=c, rezultUser=0)
-    request.session['id'] = object.id
-    return render(request, 'first/bonus_task.html',
-                      {'count': 0, 'name':0, 'title': title, 'a': object.number1, 'b': object.number2,
-                       'id': object.id})
 
-
-def bonusPrimer(request):
-    title = 'Реши пример'
     rezult_input = request.POST.get('rezult')
-    id = request.session.get('id')
-    object = Calcul.objects.get(id=id)
-    object.rezultUser = int(rezult_input)
-    object.save()
-    if object.rezult == object.rezultUser:
-        message = 'Верно'
+    if rezult_input == None:
         a = random.randint(1, 10)
         b = random.randint(1, 10)
         c = a + b
-        object = Calcul.objects.create(number1=a, number2=b, number3=0, rezult=c, rezultUser=0)
+        object = Calcul.objects.create(number1=a, number2=b, number3=0, rezult=c,  count_zvezd=0)
         request.session['id'] = object.id
+        object.save()
         return render(request, 'first/bonus_task.html',
-                      {'count': 0, 'name':0, 'title': title, 'a': object.number1, 'b': object.number2,
-                       'id': object.id, 'message':message})
+                      {'name': 0, 'title': title, 'a': object.number1, 'b': object.number2,
+                       'id': object.id})
+
     else:
-        message_error = 'Не верно'
-        return render(request, 'first/bonus_task.html',
-                      {'count': 0, 'name': 0, 'title': title, 'a': object.number1, 'b': object.number2,
-                       'id': object.id, 'message_error': message_error})
-    # return redirect('bonus')
+        id = request.session.get('id')
+        object = Calcul.objects.get(id=id)
+        object.rezultUser = int(rezult_input)
+        object.save()
+        if object.rezult == object.rezultUser:
+            message_correct = 'Верно'
+            zvezd = object.count_zvezd + 1
+            object.save()
+
+            rezult_input = request.POST.get('rezult')
+            rezultUser = int(rezult_input)
+            a = random.randint(1, 10)
+            b = random.randint(1, 10)
+            c = a + b
+            object = Calcul.objects.create(number1=a, number2=b, number3=0, rezult=c, rezultUser=rezultUser,
+                                           count_zvezd=zvezd)
+            request.session['id'] = object.id
+            object.save()
+
+            if object.count_zvezd >= 16:
+                message_endplay = 'Ты справилась!!'
+                id = request.session.get('id_name')
+                objectUser = Progress.objects.get(id=id)
+                objectUser.count_zvezd += 10
+                objectUser.save()
+                return render(request, 'first/bonus_task.html',
+                          {'count': object.count_zvezd, 'title': title, 'a': object.number1,
+                           'b': object.number2,
+                           'id': object.id, 'message_correct': message_correct, 'message_endplay':message_endplay})
+
+            return render(request, 'first/bonus_task.html',
+                          {'count': object.count_zvezd, 'title': title, 'a': object.number1,
+                           'b': object.number2,
+                           'id': object.id, 'message_correct': message_correct})
+        else:
+            message_error = 'Не верно'
+            id = request.session.get('id')
+            object = Calcul.objects.get(id=id)
+            if object.count_zvezd < 0:
+                message_minus = 'Подумай хорошо'
+                return render(request, 'first/bonus_task.html',
+                              {'count': object.count_zvezd, 'message_minus': message_minus, 'title': title,
+                               'a': object.number1, 'b': object.number2,
+                               'id': object.id, 'message_error': message_error})
+            else:
+                object.count_zvezd -= 1
+                object.save()
+                return render(request, 'first/bonus_task.html',
+                              {'count': object.count_zvezd, 'title': title, 'a': object.number1, 'b': object.number2,
+                               'id': object.id, 'message_error': message_error})
+
+
+def exitplay(request):
+    object = Calcul.objects.all()
+    object.delete()
+    del request.session['id']
+    return redirect('task')
+
+
+
+
+
 
 
 

@@ -16,6 +16,6 @@ urlpatterns = [
     path('test', views.testForm, name='test'),
     path('test2', views.test2, name='test2'),
     path('bonus', views.bonus, name='bonus'),
-    path('bonusPrimer', views.bonusPrimer, name='bonusPrimer'),
+    path('exitplay', views.exitplay, name='exitplay'),
 
 ]

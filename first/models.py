@@ -98,4 +98,5 @@ class Calcul(models.Model):
     number3 = models.IntegerField('Третье значение')
     rezult = models.IntegerField('Результат')
     rezultUser = models.IntegerField('Результат пользователя')
+    count_zvezd  = models.IntegerField('Количество заработанных звезд')
 

@@ -342,3 +342,9 @@ h2{
     background-color: #c53d3d;
     color: #ffffff;
 }
+.message {
+        height: 80px;
+        font-size: 50px;
+    color: #c53d3d;
+    font-weight: 500;
+}
